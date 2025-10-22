@@ -40,14 +40,18 @@
           loading="lazy">
         </iframe>
       </div>
-
-      <div class="fallback" id="fallback" aria-live="polite">
-        <span class="error hidden" id="errMsg">Embed não carregou.</span>
-        <a id="openYT" href="https://www.youtube.com/watch?v=5Mmq-Mr05Oc&t=19s" target="_blank" rel="noopener noreferrer" class="btn" style="background:#e6eef9;color:var(--accent);font-weight:600;">Abrir no YouTube</a>
+       <div class="media-wrap" id="mediaWrap" aria-label="Player do YouTube">
+        <iframe id="ytFrame"
+          src="https://www.youtube.com/watch?v=5Mmq-Mr05Oc&t=19s"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
       </div>
-    </section>
-  </div>
 
+    
   <script>
     document.getElementById('saveAll').addEventListener('click', function(){
       this.disabled = true;
