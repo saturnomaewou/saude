@@ -15,8 +15,8 @@
         <h2 style="margin:0;font-size:1.1rem;">Vídeos do YouTube</h2>
         <div role="toolbar" aria-label="Controles de fundo" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
           <button type="button" id="bg-none-videos" style="padding:8px 10px;border-radius:8px;border:0;background:#f3f6f8;cursor:pointer;font-weight:700;" aria-pressed="true">Sem fundo</button>
-          <button type="button" id="bg-light-videos" aria-pressed="false" style="padding:8px 10px;border-radius:8px;border:0;background:#fff;cursor:pointer;font-weight:700;">Fundo claro (3.jpg)</button>
-          <button type="button" id="bg-dark-videos" aria-pressed="false" style="padding:8px 10px;border-radius:8px;border:0;background:#111;color:#fff;cursor:pointer;font-weight:700;">Fundo escuro (4.jpg)</button>
+          <button type="button" id="bg-light-videos" aria-pressed="false" style="padding:8px 10px;border-radius:8px;border:0;background:#fff;cursor:pointer;font-weight:700;">Fundo claro (2.jpg)</button>
+          <button type="button" id="bg-dark-videos" aria-pressed="false" style="padding:8px 10px;border-radius:8px;border:0;background:#111;color:#fff;cursor:pointer;font-weight:700;">Fundo escuro (1.jpg)</button>
 
           <!-- botão para index.html -->
           <a href="index.html" style="padding:8px 10px;border-radius:8px;background:#f3f6f8;text-decoration:none;color:inherit;font-weight:700;display:inline-flex;align-items:center;gap:8px;">Voltar à Página Inicial</a>
@@ -106,7 +106,7 @@
 
       function aplicarFundoClaro(){
         // aplica imagem clara ao body (fundo da página)
-        document.body.style.backgroundImage = 'url("3.jpg")';
+        document.body.style.backgroundImage = 'url("2.jpg")';
         document.body.style.backgroundSize = 'cover';
         document.body.style.backgroundPosition = 'center';
         document.body.style.backgroundRepeat = 'no-repeat';
@@ -118,7 +118,7 @@
 
       function aplicarFundoEscuro(){
         // aplica imagem escura ao body (fundo da página)
-        document.body.style.backgroundImage = 'url("4.jpg")';
+        document.body.style.backgroundImage = 'url("1.jpg")';
         document.body.style.backgroundSize = 'cover';
         document.body.style.backgroundPosition = 'center';
         document.body.style.backgroundRepeat = 'no-repeat';
@@ -137,10 +137,10 @@
 
       btnNone.addEventListener('click', aplicarSemFundo);
       btnLight.addEventListener('click', ()=>{
-        testaImagem('3.jpg', aplicarFundoClaro, ()=>{ alert('Imagem 3.jpg não encontrada. Verifique o caminho.'); aplicarSemFundo(); });
+        testaImagem('2.jpg', aplicarFundoClaro, ()=>{ alert('Imagem 2.jpg não encontrada. Verifique o caminho.'); aplicarSemFundo(); });
       });
       btnDark.addEventListener('click', ()=>{
-        testaImagem('4.jpg', aplicarFundoEscuro, ()=>{ alert('Imagem 4.jpg não encontrada. Verifique o caminho.'); aplicarSemFundo(); });
+        testaImagem('1.jpg', aplicarFundoEscuro, ()=>{ alert('Imagem 1.jpg não encontrada. Verifique o caminho.'); aplicarSemFundo(); });
       });
 
       // define z-index do body overlay para ficar entre background e conteúdo
