@@ -3,74 +3,100 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Opções: Sim / Não / Parcial</title>
+<title>Opções: Sim / Não / Parcial — com fundos</title>
 <style>
 :root{
---bg:#f7f9fb;
---card:#ffffff;
---accent:#2b7a78;
---muted:#6b6b6b;
---success:#2d9f6b;
---danger:#d64545;
---warn:#f0a500;
---radius:12px;
-font-size:18px;
+  --bg:#f7f9fb;
+  --card:#ffffff;
+  --accent:#2b7a78;
+  --muted:#6b6b6b;
+  --success:#2d9f6b;
+  --danger:#d64545;
+  --warn:#f0a500;
+  --radius:12px;
+  font-size:18px;
+  --page-overlay: rgba(247,249,251,0.75);
 }
+*{box-sizing:border-box}
 body{
-font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-background:var(--bg);
-color:#111;
-padding:24px;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  background:var(--bg);
+  color:#111;
+  padding:24px;
+  transition:background .24s ease, color .18s ease;
+  min-height:100vh;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+  position:relative;
 }
+/* overlay para escurecer ou suavizar imagem */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:var(--page-overlay);
+  pointer-events:none;
+  transition:background .24s ease, backdrop-filter .18s ease;
+  z-index:0;
+}
+
+/* quando estiver com imagem aplicada, elevamos z-index dos conteúdos */
+.page-wrap{
+  position:relative;
+  z-index:1;
+}
+
+/* cartões e conteúdo */
 .question-card{
-background:var(--card);
-border-radius:var(--radius);
-padding:18px;
-max-width:560px;
-box-shadow:0 6px 18px rgba(0,0,0,0.06);
-margin-bottom:18px;
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:18px;
+  max-width:560px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.06);
+  margin-bottom:18px;
 }
 .legend{
-font-weight:700;
-margin-bottom:8px;
-font-size:1.05rem;
+  font-weight:700;
+  margin-bottom:8px;
+  font-size:1.05rem;
 }
 .hint{
-color:var(--muted);
-font-size:0.95rem;
-margin-bottom:12px;
+  color:var(--muted);
+  font-size:0.95rem;
+  margin-bottom:12px;
 }
 .options{
-display:flex;
-gap:12px;
-align-items:stretch;
+  display:flex;
+  gap:12px;
+  align-items:stretch;
 }
 /* esconder o input nativo, usar o label como botão grande */
 .options input[type="radio"]{
-position:absolute;
-opacity:0;
-pointer-events:none;
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
 }
 .option{
-flex:1;
-display:flex;
-align-items:center;
-justify-content:center;
-gap:10px;
-padding:14px 12px;
-border-radius:10px;
-background:#f3f6f8;
-border:2px solid transparent;
-cursor:pointer;
-user-select:none;
-transition:transform .08s ease, box-shadow .08s ease, background .12s ease;
-font-size:1.05rem;
-font-weight:600;
-min-height:64px;
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:14px 12px;
+  border-radius:10px;
+  background:#f3f6f8;
+  border:2px solid transparent;
+  cursor:pointer;
+  user-select:none;
+  transition:transform .08s ease, box-shadow .08s ease, background .12s ease;
+  font-size:1.05rem;
+  font-weight:600;
+  min-height:64px;
 }
 .option:focus{
-outline:3px solid rgba(43,122,120,0.12);
-outline-offset:3px;
+  outline:3px solid rgba(43,122,120,0.12);
+  outline-offset:3px;
 }
 .option:hover{ transform:translateY(-2px); box-shadow:0 6px 12px rgba(0,0,0,0.06); }
 /* estilos para estados */
@@ -79,121 +105,176 @@ input[id$="nao"]:checked + .option{ background:linear-gradient(180deg,#fff1f1,#f
 input[id$="parcial"]:checked + .option{ background:linear-gradient(180deg,#fff9eb,#fff3d6); border-color:var(--warn); box-shadow:0 6px 14px rgba(240,165,0,0.08); }
 .option .label-text{display:block;}
 .feedback{
-margin-top:12px;
-font-size:0.99rem;
-color:var(--muted);
-min-height:20px;
+  margin-top:12px;
+  font-size:0.99rem;
+  color:var(--muted);
+  min-height:20px;
 }
 /* responsividade para telas pequenas */
 @media (max-width:420px){
-.options{ flex-direction:column; }
+  .options{ flex-direction:column; }
 }
 
 /* botão para vídeos (estilo semelhante aos outros) */
 .btn-video{
-background:#2b7a78;
-color:#fff;
-padding:10px 14px;
-border-radius:10px;
-border:0;
-font-weight:700;
-cursor:pointer;
-display:inline-flex;
-align-items:center;
-justify-content:center;
-gap:8px;
+  background:#2b7a78;
+  color:#fff;
+  padding:10px 14px;
+  border-radius:10px;
+  border:0;
+  font-weight:700;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
 }
 .btn-ghost{
-background:#e9eef0;
-border:0;
-padding:10px 14px;
-border-radius:10px;
-cursor:pointer;
+  background:#e9eef0;
+  border:0;
+  padding:10px 14px;
+  border-radius:10px;
+  cursor:pointer;
 }
 .controls-row{
-max-width:560px;
-display:flex;
-gap:8px;
-margin-bottom:40px;
-align-items:center;
+  max-width:560px;
+  display:flex;
+  gap:8px;
+  margin-bottom:20px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+/* controles de fundo */
+.bg-controls{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+.bg-btn{
+  padding:8px 10px;
+  border-radius:10px;
+  border:0;
+  cursor:pointer;
+  font-weight:700;
+  background:#fff;
+  box-shadow:0 4px 12px rgba(0,0,0,0.06);
+}
+.bg-btn[aria-pressed="true"]{ outline:3px solid rgba(43,122,120,0.12); transform:translateY(-2px); }
+
+/* modo escuro para cards quando fundo escuro selecionado */
+.theme-dark {
+  color:#eee;
+}
+.theme-dark .question-card{
+  background: rgba(0,0,0,0.55);
+  box-shadow:0 6px 24px rgba(0,0,0,0.32);
+  color:#f2f2f2;
+}
+.theme-dark .option{ background: rgba(255,255,255,0.06); border-color: transparent; }
+.theme-dark .option:hover{ box-shadow:0 8px 18px rgba(0,0,0,0.32); transform:translateY(-2px); }
+.theme-dark .hint, .theme-dark .feedback { color: #d6d6d6; }
+.theme-dark .btn-video{ background:#4fb3ad; }
+
+/* modo claro (sutileza) para quando imagem clara ou sem imagem */
+.theme-light {
+  --page-overlay: rgba(247,249,251,0.75);
+  color:#111;
+}
+.theme-light .question-card{ background:var(--card); color:inherit; }
+
+/* pequenos ajustes para telas muito pequenas */
+@media (max-width:360px){
+  body{ padding:14px; }
+  .controls-row{ gap:6px; }
 }
 </style>
 </head>
 <body>
-
+<div class="page-wrap">
 <form id="daily-form" aria-describedby="daily-hint">
-<!-- Novo: 8 copos de água -->
-<section class="question-card" id="card-agua" aria-describedby="hint-agua">
-<div class="legend">Já tomou 8 copos de água hoje?</div>
-<div id="hint-agua" class="hint">Marque <strong>Sim</strong>, <strong>Não</strong> ou <strong>Parcial</strong> conforme seu progresso.</div>
+<!-- controles para trocar fundo -->
+<div class="controls-row" aria-hidden="false">
+  <div class="bg-controls" role="toolbar" aria-label="Controles de fundo">
+    <button type="button" class="bg-btn" id="bg-none" aria-pressed="true" title="Sem imagem">Sem imagem</button>
+    <button type="button" class="bg-btn" id="bg-dark" aria-pressed="false" title="Fundo escuro (1.jpg)">Fundo escuro</button>
+    <button type="button" class="bg-btn" id="bg-light" aria-pressed="false" title="Fundo claro (2.jpg)">Fundo claro</button>
+  </div>
 
-<div class="options" role="radiogroup" aria-label="Opções água: Sim, Não, Parcial">
-<input type="radio" name="agua" id="agua-sim" value="sim" />
-<label for="agua-sim" class="option" tabindex="0"><span class="label-text">Sim</span></label>
+  <div style="margin-left:auto; display:flex; gap:8px;">
+    <button type="submit" style="background:var(--accent); color:#fff; padding:10px 14px; border-radius:10px; border:0; font-weight:700; cursor:pointer;">
+      Salvar todas
+    </button>
 
-<input type="radio" name="agua" id="agua-nao" value="nao" />
-<label for="agua-nao" class="option" tabindex="0"><span class="label-text">Não</span></label>
+    <button type="button" id="limpar-tudo" class="btn-ghost">
+      Limpar tudo
+    </button>
 
-<input type="radio" name="agua" id="agua-parcial" value="parcial" />
-<label for="agua-parcial" class="option" tabindex="0"><span class="label-text">Parcial</span></label>
+    <a href="videos.html" class="btn-video" title="Ir para a página de vídeos" role="button">
+      Ver vídeos
+    </a>
+  </div>
 </div>
 
-<div class="feedback" id="feedback-agua" aria-live="polite"></div>
+<!-- Novo: 8 copos de água -->
+<section class="question-card" id="card-agua" aria-describedby="hint-agua">
+  <div class="legend">Já tomou 8 copos de água hoje?</div>
+  <div id="hint-agua" class="hint">Marque <strong>Sim</strong>, <strong>Não</strong> ou <strong>Parcial</strong> conforme seu progresso.</div>
+
+  <div class="options" role="radiogroup" aria-label="Opções água: Sim, Não, Parcial">
+    <input type="radio" name="agua" id="agua-sim" value="sim" />
+    <label for="agua-sim" class="option" tabindex="0"><span class="label-text">Sim</span></label>
+
+    <input type="radio" name="agua" id="agua-nao" value="nao" />
+    <label for="agua-nao" class="option" tabindex="0"><span class="label-text">Não</span></label>
+
+    <input type="radio" name="agua" id="agua-parcial" value="parcial" />
+    <label for="agua-parcial" class="option" tabindex="0"><span class="label-text">Parcial</span></label>
+  </div>
+
+  <div class="feedback" id="feedback-agua" aria-live="polite"></div>
 </section>
 
 <!-- Novo: 15 minutos no sol -->
 <section class="question-card" id="card-sol" aria-describedby="hint-sol">
-<div class="legend">Já passou 15 minutos no sol hoje?</div>
-<div id="hint-sol" class="hint">Marque <strong>Sim</strong>, <strong>Não</strong> ou <strong>Parcial</strong> conforme o tempo exposto.</div>
+  <div class="legend">Já passou 15 minutos no sol hoje?</div>
+  <div id="hint-sol" class="hint">Marque <strong>Sim</strong>, <strong>Não</strong> ou <strong>Parcial</strong> conforme o tempo exposto.</div>
 
-<div class="options" role="radiogroup" aria-label="Opções sol: Sim, Não, Parcial">
-<input type="radio" name="sol" id="sol-sim" value="sim" />
-<label for="sol-sim" class="option" tabindex="0"><span class="label-text">Sim</span></label>
+  <div class="options" role="radiogroup" aria-label="Opções sol: Sim, Não, Parcial">
+    <input type="radio" name="sol" id="sol-sim" value="sim" />
+    <label for="sol-sim" class="option" tabindex="0"><span class="label-text">Sim</span></label>
 
-<input type="radio" name="sol" id="sol-nao" value="nao" />
-<label for="sol-nao" class="option" tabindex="0"><span class="label-text">Não</span></label>
+    <input type="radio" name="sol" id="sol-nao" value="nao" />
+    <label for="sol-nao" class="option" tabindex="0"><span class="label-text">Não</span></label>
 
-<input type="radio" name="sol" id="sol-parcial" value="parcial" />
-<label for="sol-parcial" class="option" tabindex="0"><span class="label-text">Parcial</span></label>
-</div>
+    <input type="radio" name="sol" id="sol-parcial" value="parcial" />
+    <label for="sol-parcial" class="option" tabindex="0"><span class="label-text">Parcial</span></label>
+  </div>
 
-<div class="feedback" id="feedback-sol" aria-live="polite"></div>
+  <div class="feedback" id="feedback-sol" aria-live="polite"></div>
 </section>
 
 <!-- Novo: 10 minutos de exercícios -->
 <section class="question-card" id="card-exercicio" aria-describedby="hint-exercicio">
-<div class="legend">Já praticou 10 minutos de exercícios?</div>
-<div id="hint-exercicio" class="hint">Marque <strong>Sim</strong>, <strong>Não</strong> ou <strong>Parcial</strong> conforme sua prática.</div>
+  <div class="legend">Já praticou 10 minutos de exercícios?</div>
+  <div id="hint-exercicio" class="hint">Marque <strong>Sim</strong>, <strong>Não</strong> ou <strong>Parcial</strong> conforme sua prática.</div>
 
-<div class="options" role="radiogroup" aria-label="Opções exercício: Sim, Não, Parcial">
-<input type="radio" name="exercicio" id="exercicio-sim" value="sim" />
-<label for="exercicio-sim" class="option" tabindex="0"><span class="label-text">Sim</span></label>
+  <div class="options" role="radiogroup" aria-label="Opções exercício: Sim, Não, Parcial">
+    <input type="radio" name="exercicio" id="exercicio-sim" value="sim" />
+    <label for="exercicio-sim" class="option" tabindex="0"><span class="label-text">Sim</span></label>
 
-<input type="radio" name="exercicio" id="exercicio-nao" value="nao" />
-<label for="exercicio-nao" class="option" tabindex="0"><span class="label-text">Não</span></label>
+    <input type="radio" name="exercicio" id="exercicio-nao" value="nao" />
+    <label for="exercicio-nao" class="option" tabindex="0"><span class="label-text">Não</span></label>
 
-<input type="radio" name="exercicio" id="exercicio-parcial" value="parcial" />
-<label for="exercicio-parcial" class="option" tabindex="0"><span class="label-text">Parcial</span></label>
-</div>
+    <input type="radio" name="exercicio" id="exercicio-parcial" value="parcial" />
+    <label for="exercicio-parcial" class="option" tabindex="0"><span class="label-text">Parcial</span></label>
+  </div>
 
-<div class="feedback" id="feedback-exercicio" aria-live="polite"></div>
+  <div class="feedback" id="feedback-exercicio" aria-live="polite"></div>
 </section>
 
-<div class="controls-row">
-  <button type="submit" style="background:var(--accent); color:#fff; padding:10px 14px; border-radius:10px; border:0; font-weight:700; cursor:pointer;">
-    Salvar todas
-  </button>
-
-  <button type="button" id="limpar-tudo" class="btn-ghost">
-    Limpar tudo
-  </button>
-
-  <!-- Botão que leva para videos.html -->
-  <a href="videos.html" class="btn-video" title="Ir para a página de vídeos" role="button">
-    Ver vídeos
-  </a>
-</div>
 </form>
+</div>
 
 <script>
 // comportamento para seleção, teclado e feedback para múltiplos cards
@@ -202,74 +283,151 @@ const limparTudo = document.getElementById('limpar-tudo');
 const questionNames = ['agua','sol','exercicio'];
 
 function atualizaFeedbackPara(name){
-const sel = form.querySelector(`input[name="${name}"]:checked`);
-const el = document.getElementById(`feedback-${name}`);
-if(!sel){ el.textContent = ''; return; }
-const val = sel.value;
-if(val === 'sim') el.textContent = 'Ótimo! Obrigado por registrar.';
-else if(val === 'nao') el.textContent = 'Tudo bem. Vamos lembrar novamente mais tarde.';
-else if(val === 'parcial') el.textContent = 'Registro parcial feito. Pequenos passos também contam.';
+  const sel = form.querySelector(`input[name="${name}"]:checked`);
+  const el = document.getElementById(`feedback-${name}`);
+  if(!sel){ el.textContent = ''; return; }
+  const val = sel.value;
+  if(val === 'sim') el.textContent = 'Ótimo! Obrigado por registrar.';
+  else if(val === 'nao') el.textContent = 'Tudo bem. Vamos lembrar novamente mais tarde.';
+  else if(val === 'parcial') el.textContent = 'Registro parcial feito. Pequenos passos também contam.';
 }
 
 questionNames.forEach(name => {
-const radios = form.querySelectorAll(`input[name="${name}"]`);
-radios.forEach(r => r.addEventListener('change', () => atualizaFeedbackPara(name)));
+  const radios = form.querySelectorAll(`input[name="${name}"]`);
+  radios.forEach(r => r.addEventListener('change', () => atualizaFeedbackPara(name)));
 });
 
 // permitir seleção via tecla Enter ou Espaço quando o label estiver focado
 const labels = form.querySelectorAll('.option');
 labels.forEach(lbl => {
-lbl.addEventListener('keydown', (e) => {
-if(e.key === ' ' || e.key === 'Enter'){
-e.preventDefault();
-const forId = lbl.getAttribute('for') || lbl.htmlFor;
-const inp = document.getElementById(forId);
-if(inp) inp.checked = true;
-inp.dispatchEvent(new Event('change', { bubbles: true }));
-}
-});
-lbl.addEventListener('click', () => {
-const forId = lbl.getAttribute('for') || lbl.htmlFor;
-const inp = document.getElementById(forId);
-if(inp) inp.checked = true;
-inp.dispatchEvent(new Event('change', { bubbles: true }));
-});
+  lbl.addEventListener('keydown', (e) => {
+    if(e.key === ' ' || e.key === 'Enter'){
+      e.preventDefault();
+      const forId = lbl.getAttribute('for') || lbl.htmlFor;
+      const inp = document.getElementById(forId);
+      if(inp) inp.checked = true;
+      inp.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+  });
+  lbl.addEventListener('click', () => {
+    const forId = lbl.getAttribute('for') || lbl.htmlFor;
+    const inp = document.getElementById(forId);
+    if(inp) inp.checked = true;
+    inp.dispatchEvent(new Event('change', { bubbles: true }));
+  });
 });
 
 form.addEventListener('submit', (e)=>{
-e.preventDefault();
-const results = {};
-let anySelected = false;
-questionNames.forEach(name => {
-const sel = form.querySelector(`input[name="${name}"]:checked`);
-results[name] = sel ? sel.value : null;
-if(sel) anySelected = true;
-});
-const feedbackGlobal = document.createElement('div');
-feedbackGlobal.className = 'question-card';
-if(!anySelected){
-feedbackGlobal.textContent = 'Por favor, escolha ao menos uma opção antes de salvar.';
-form.appendChild(feedbackGlobal);
-setTimeout(()=> feedbackGlobal.remove(), 3000);
-return;
-}
-// Exemplo: payload contendo todas as respostas e timestamp
-const payload = { respostas: results, when: new Date().toISOString() };
-// fetch('/api/habitos', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
-const confirmMsg = document.createElement('div');
-confirmMsg.className = 'question-card';
-confirmMsg.textContent = 'Respostas salvas: ' + Object.entries(results).map(([k,v])=> `${k}=${v||'n/a'}`).join('; ');
-form.appendChild(confirmMsg);
-setTimeout(()=> confirmMsg.remove(), 3000);
+  e.preventDefault();
+  const results = {};
+  let anySelected = false;
+  questionNames.forEach(name => {
+    const sel = form.querySelector(`input[name="${name}"]:checked`);
+    results[name] = sel ? sel.value : null;
+    if(sel) anySelected = true;
+  });
+  const feedbackGlobal = document.createElement('div');
+  feedbackGlobal.className = 'question-card';
+  if(!anySelected){
+    feedbackGlobal.textContent = 'Por favor, escolha ao menos uma opção antes de salvar.';
+    form.appendChild(feedbackGlobal);
+    setTimeout(()=> feedbackGlobal.remove(), 3000);
+    return;
+  }
+  // Exemplo: payload contendo todas as respostas e timestamp
+  const payload = { respostas: results, when: new Date().toISOString() };
+  // fetch('/api/habitos', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+  const confirmMsg = document.createElement('div');
+  confirmMsg.className = 'question-card';
+  confirmMsg.textContent = 'Respostas salvas: ' + Object.entries(results).map(([k,v])=> `${k}=${v||'n/a'}`).join('; ');
+  form.appendChild(confirmMsg);
+  setTimeout(()=> confirmMsg.remove(), 3000);
 });
 
 limparTudo.addEventListener('click', ()=>{
-questionNames.forEach(name => {
-const radios = form.querySelectorAll(`input[name="${name}"]`);
-radios.forEach(r => r.checked = false);
-atualizaFeedbackPara(name);
+  questionNames.forEach(name => {
+    const radios = form.querySelectorAll(`input[name="${name}"]`);
+    radios.forEach(r => r.checked = false);
+    atualizaFeedbackPara(name);
+  });
 });
+
+/* -------- controle de fundos (1.jpg escuro, 2.jpg claro) -------- */
+const body = document.body;
+const wrap = document.querySelector('.page-wrap');
+const btnNone = document.getElementById('bg-none');
+const btnDark = document.getElementById('bg-dark');
+const btnLight = document.getElementById('bg-light');
+
+// função auxiliar para atualizar estados de botão
+function setPressed(activeBtn){
+  [btnNone, btnDark, btnLight].forEach(b=>{
+    b.setAttribute('aria-pressed', b===activeBtn ? 'true' : 'false');
+  });
+}
+
+// aplicar fundo sem imagem (padrão)
+function aplicarSemFundo(){
+  body.style.backgroundImage = '';
+  body.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--bg') || '#f7f9fb';
+  document.documentElement.classList.remove('theme-dark');
+  document.documentElement.classList.add('theme-light');
+  body.style.setProperty('--page-overlay', 'rgba(247,249,251,0.75)');
+  setPressed(btnNone);
+}
+
+// aplicar fundo escuro (1.jpg)
+function aplicarFundoEscuro(){
+  body.style.backgroundImage = 'url("1.jpg")';
+  body.style.backgroundColor = '';
+  // escurecer overlay para garantir contraste
+  body.style.setProperty('--page-overlay', 'rgba(0,0,0,0.48)');
+  // aplicar tema escuro aos cards
+  document.documentElement.classList.add('theme-dark');
+  document.documentElement.classList.remove('theme-light');
+  setPressed(btnDark);
+}
+
+// aplicar fundo claro (2.jpg)
+function aplicarFundoClaro(){
+  body.style.backgroundImage = 'url("2.jpg")';
+  body.style.backgroundColor = '';
+  // overlay mais claro para manter legibilidade
+  body.style.setProperty('--page-overlay', 'rgba(255,255,255,0.5)');
+  document.documentElement.classList.remove('theme-dark');
+  document.documentElement.classList.add('theme-light');
+  setPressed(btnLight);
+}
+
+// eventos
+btnNone.addEventListener('click', aplicarSemFundo);
+btnDark.addEventListener('click', aplicarFundoEscuro);
+btnLight.addEventListener('click', aplicarFundoClaro);
+
+// tentar detectar falha de carregamento das imagens e exibir mensagem no console
+function testaImagem(src, onOk, onErr){
+  const img = new Image();
+  img.onload = onOk;
+  img.onerror = onErr;
+  img.src = src;
+}
+
+// valida imagens ao selecionar para avisar se não encontradas
+btnDark.addEventListener('click', ()=>{
+  testaImagem('1.jpg',
+    ()=>{ /* ok */ },
+    ()=>{ console.warn('Imagem 1.jpg não encontrada. Verifique o caminho.'); aplicarSemFundo(); }
+  );
 });
+btnLight.addEventListener('click', ()=>{
+  testaImagem('2.jpg',
+    ()=>{ /* ok */ },
+    ()=>{ console.warn('Imagem 2.jpg não encontrada. Verifique o caminho.'); aplicarSemFundo(); }
+  );
+});
+
+// inicial: sem fundo
+aplicarSemFundo();
 </script>
 
 </body>
