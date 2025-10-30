@@ -1,133 +1,50 @@
-<section id="videos-section" style="position:relative;overflow:visible;padding:20px 12px;">
-  <div style="max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:12px;">
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-      <h2 style="margin:0;font-size:1.25rem;">Vídeos do YouTube</h2>
+<!-- Wrapper centralizado e responsivo (tamanho reduzido) -->
+<div id="videos-wrap" style="position:relative;padding:18px;border-radius:12px;background:#fff;z-index:1; width:100%; box-shadow:0 8px 24px rgba(0,0,0,0.06);">
+  <div id="videos-bg-overlay" aria-hidden="true" style="position:absolute;inset:0;border-radius:12px;pointer-events:none;transition:background .22s ease,backdrop-filter .22s ease;"></div>
 
-      <!-- Controles de fundo -->
-      <div role="toolbar" aria-label="Controles de fundo" style="display:flex;gap:8px;flex-wrap:wrap;">
-        <button type="button" id="bg-none-videos" style="padding:8px 10px;border-radius:8px;border:0;background:#f3f6f8;cursor:pointer;font-weight:700;" aria-pressed="true">Sem fundo</button>
-        <button type="button" id="bg-light-videos" aria-pressed="false" style="padding:8px 10px;border-radius:8px;border:0;background:#fff;cursor:pointer;font-weight:700;">Fundo claro (3.jpg)</button>
-        <button type="button" id="bg-dark-videos" aria-pressed="false" style="padding:8px 10px;border-radius:8px;border:0;background:#111;color:#fff;cursor:pointer;font-weight:700;">Fundo escuro (4.jpg)</button>
-      </div>
+  <div style="position:relative;z-index:2;display:flex;flex-direction:column;gap:14px;align-items:center;">
+    <!-- Cada player com max-width menor (640px) -->
+    <div class="media-wrap" aria-label="Player do YouTube 1" style="width:100%;max-width:640px;position:relative;padding-top:56.25%;overflow:hidden;border-radius:8px;background:#000;">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/YTUEan019KI?rel=0&modestbranding=1"
+        title="YouTube video player 1"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+        loading="lazy"
+        style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
+      </iframe>
     </div>
 
-    <!-- Wrapper centralizado e responsivo -->
-    <div id="videos-wrap" style="position:relative;padding:18px;border-radius:12px;background:#fff;z-index:1; width:100%; box-shadow:0 8px 24px rgba(0,0,0,0.06);">
-      <div id="videos-bg-overlay" aria-hidden="true" style="position:absolute;inset:0;border-radius:12px;pointer-events:none;transition:background .22s ease,backdrop-filter .22s ease;"></div>
+    <div class="media-wrap" aria-label="Player do YouTube 2" style="width:100%;max-width:640px;position:relative;padding-top:56.25%;overflow:hidden;border-radius:8px;background:#000;">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/5Mmq-Mr05Oc?start=27&rel=0&modestbranding=1"
+        title="YouTube video player 2"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+        loading="lazy"
+        style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
+      </iframe>
+    </div>
 
-      <div style="position:relative;z-index:2;display:flex;flex-direction:column;gap:14px;align-items:center;">
-        <!-- Cada player dentro de um container com max-width para centralizar -->
-        <div class="media-wrap" aria-label="Player do YouTube 1" style="width:100%;max-width:860px;position:relative;padding-top:56.25%;overflow:hidden;border-radius:8px;background:#000;">
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/YTUEan019KI?rel=0&modestbranding=1"
-            title="YouTube video player 1"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-            loading="lazy"
-            style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
-          </iframe>
-        </div>
+    <div class="media-wrap" aria-label="Player do YouTube 3" style="width:100%;max-width:640px;position:relative;padding-top:56.25%;overflow:hidden;border-radius:8px;background:#000;">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/eMWLOkvX59s?rel=0&modestbranding=1"
+        title="YouTube video player 3"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+        loading="lazy"
+        style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
+      </iframe>
+    </div>
 
-        <div class="media-wrap" aria-label="Player do YouTube 2" style="width:100%;max-width:860px;position:relative;padding-top:56.25%;overflow:hidden;border-radius:8px;background:#000;">
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/5Mmq-Mr05Oc?start=27&rel=0&modestbranding=1"
-            title="YouTube video player 2"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-            loading="lazy"
-            style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
-          </iframe>
-        </div>
-
-        <div class="media-wrap" aria-label="Player do YouTube 3" style="width:100%;max-width:860px;position:relative;padding-top:56.25%;overflow:hidden;border-radius:8px;background:#000;">
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/eMWLOkvX59s?rel=0&modestbranding=1"
-            title="YouTube video player 3"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-            loading="lazy"
-            style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
-          </iframe>
-        </div>
-
-        <!-- Fallbacks -->
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;margin-top:6px;">
-          <a href="https://www.youtube.com/watch?v=YTUEan019KI" target="_blank" rel="noopener noreferrer" style="padding:8px 10px;border-radius:8px;background:#f3f6f8;text-decoration:none;color:inherit;font-weight:700;">Abrir vídeo 1 no YouTube</a>
-          <a href="https://www.youtube.com/watch?v=5Mmq-Mr05Oc&t=27s" target="_blank" rel="noopener noreferrer" style="padding:8px 10px;border-radius:8px;background:#f3f6f8;text-decoration:none;color:inherit;font-weight:700;">Abrir vídeo 2 (0:27)</a>
-          <a href="https://www.youtube.com/watch?v=3JZ_D3ELwOQ" target="_blank" rel="noopener noreferrer" style="padding:8px 10px;border-radius:8px;background:#f3f6f8;text-decoration:none;color:inherit;font-weight:700;">Abrir vídeo 3</a>
-          <span style="color:#b00020;font-weight:700;">Se o embed não carregar, desative bloqueadores de conteúdo.</span>
-        </div>
-      </div>
+    <!-- Fallbacks centralizados -->
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;margin-top:6px;">
+      <a href="https://www.youtube.com/watch?v=YTUEan019KI" target="_blank" rel="noopener noreferrer" style="padding:8px 10px;border-radius:8px;background:#f3f6f8;text-decoration:none;color:inherit;font-weight:700;">Abrir vídeo 1 no YouTube</a>
+      <a href="https://www.youtube.com/watch?v=5Mmq-Mr05Oc&t=27s" target="_blank" rel="noopener noreferrer" style="padding:8px 10px;border-radius:8px;background:#f3f6f8;text-decoration:none;color:inherit;font-weight:700;">Abrir vídeo 2 (0:27)</a>
+      <a href="https://www.youtube.com/watch?v=3JZ_D3ELwOQ" target="_blank" rel="noopener noreferrer" style="padding:8px 10px;border-radius:8px;background:#f3f6f8;text-decoration:none;color:inherit;font-weight:700;">Abrir vídeo 3</a>
     </div>
   </div>
-</section>
-
-<script>
-  (function(){
-    const wrap = document.getElementById('videos-wrap');
-    const overlay = document.getElementById('videos-bg-overlay');
-    const btnNone = document.getElementById('bg-none-videos');
-    const btnLight = document.getElementById('bg-light-videos');
-    const btnDark = document.getElementById('bg-dark-videos');
-
-    function setPressed(active){ [btnNone, btnLight, btnDark].forEach(b => b.setAttribute('aria-pressed', b===active ? 'true' : 'false')); }
-
-    function aplicarSemFundo(){
-      wrap.style.backgroundImage = '';
-      wrap.style.backgroundColor = '#fff';
-      overlay.style.background = 'transparent';
-      overlay.style.backdropFilter = 'none';
-      setPressed(btnNone);
-    }
-
-    function aplicarFundoClaro(){
-      wrap.style.backgroundImage = 'url("3.jpg")';
-      wrap.style.backgroundSize = 'cover';
-      wrap.style.backgroundPosition = 'center';
-      overlay.style.background = 'linear-gradient(rgba(255,255,255,0.60), rgba(255,255,255,0.35))';
-      overlay.style.backdropFilter = 'blur(2px)';
-      setPressed(btnLight);
-    }
-
-    function aplicarFundoEscuro(){
-      wrap.style.backgroundImage = 'url("4.jpg")';
-      wrap.style.backgroundSize = 'cover';
-      wrap.style.backgroundPosition = 'center';
-      overlay.style.background = 'linear-gradient(rgba(0,0,0,0.60), rgba(0,0,0,0.30))';
-      overlay.style.backdropFilter = 'blur(2px)';
-      setPressed(btnDark);
-    }
-
-    function testaImagem(src, onOk, onErr){
-      const img = new Image();
-      img.onload = onOk;
-      img.onerror = onErr;
-      img.src = src;
-    }
-
-    btnNone.addEventListener('click', aplicarSemFundo);
-
-    btnLight.addEventListener('click', ()=>{
-      testaImagem('3.jpg',
-        aplicarFundoClaro,
-        ()=>{ alert('Imagem 3.jpg não encontrada. Verifique o caminho.'); aplicarSemFundo(); }
-      );
-    });
-
-    btnDark.addEventListener('click', ()=>{
-      testaImagem('4.jpg',
-        aplicarFundoEscuro,
-        ()=>{ alert('Imagem 4.jpg não encontrada. Verifique o caminho.'); aplicarSemFundo(); }
-      );
-    });
-
-    // inicial: sem fundo
-    aplicarSemFundo();
-
-    // melhoria: mantém vídeos centralizados ao redimensionar (não obrigatório, mas garante repaint)
-    window.addEventListener('resize', ()=>{ /* intenção: manter layout fluido; sem lógica extra necessária */ });
-  })();
-</script>
+</div>
