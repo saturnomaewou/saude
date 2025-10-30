@@ -1,32 +1,27 @@
 <section id="videos-section" style="position:relative;overflow:visible;padding:20px 12px;">
   <div style="max-width:1200px;margin:0 auto;display:flex;gap:20px;align-items:flex-start;">
-    <!-- Coluna esquerda (conteúdo adicional ou vazio) -->
+    <!-- Coluna esquerda -->
     <div id="left-col" style="flex:1;min-width:220px;">
-      <!-- Exemplo de espaço para texto / legendas -->
-      <div style="background:#fff;padding:16px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);">
+      <div style="background:rgba(255,255,255,0.85);padding:16px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);backdrop-filter:blur(4px);">
         <h3 style="margin:0 0 8px 0;font-size:1.05rem;">Descrição / Legenda</h3>
-        <p style="margin:0;color:#555;">Use esta coluna para texto, links, notas ou outro conteúdo complementar.</p>
+        <p style="margin:0;color:#555;">Use esta coluna para texto, links ou informações complementares.</p>
       </div>
     </div>
 
-    <!-- Coluna direita: vídeos (ocupa até 50% da viewport) -->
+    <!-- Coluna direita: vídeos -->
     <div id="videos-col" style="width:50vw;max-width:640px;min-width:300px;position:relative;">
-      <!-- controles superiores -->
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:8px;">
         <h2 style="margin:0;font-size:1.1rem;">Vídeos do YouTube</h2>
         <div role="toolbar" aria-label="Controles de fundo" style="display:flex;gap:8px;flex-wrap:wrap;">
           <button type="button" id="bg-none-videos" style="padding:8px 10px;border-radius:8px;border:0;background:#f3f6f8;cursor:pointer;font-weight:700;" aria-pressed="true">Sem fundo</button>
-          <button type="button" id="bg-light-videos" aria-pressed="false" style="padding:8px 10px;border-radius:8px;border:0;background:#fff;cursor:pointer;font-weight:700;">Fundo claro</button>
-          <button type="button" id="bg-dark-videos" aria-pressed="false" style="padding:8px 10px;border-radius:8px;border:0;background:#111;color:#fff;cursor:pointer;font-weight:700;">Fundo escuro</button>
+          <button type="button" id="bg-light-videos" aria-pressed="false" style="padding:8px 10px;border-radius:8px;border:0;background:#fff;cursor:pointer;font-weight:700;">Fundo claro (3.jpg)</button>
+          <button type="button" id="bg-dark-videos" aria-pressed="false" style="padding:8px 10px;border-radius:8px;border:0;background:#111;color:#fff;cursor:pointer;font-weight:700;">Fundo escuro (4.jpg)</button>
         </div>
       </div>
 
-      <!-- Wrapper com background aplicável -->
-      <div id="videos-wrap" style="position:relative;padding:14px;border-radius:12px;background:#fff;z-index:1;box-shadow:0 8px 24px rgba(0,0,0,0.06);overflow:hidden;">
-        <div id="videos-bg-overlay" aria-hidden="true" style="position:absolute;inset:0;border-radius:12px;pointer-events:none;transition:background .22s ease,backdrop-filter .22s ease;"></div>
-
+      <!-- Wrapper dos vídeos (sem background de página aqui) -->
+      <div id="videos-wrap" style="position:relative;padding:14px;border-radius:12px;background:rgba(255,255,255,0.92);z-index:1;box-shadow:0 8px 24px rgba(0,0,0,0.06);overflow:hidden;backdrop-filter:blur(4px);">
         <div style="position:relative;z-index:2;display:flex;flex-direction:column;gap:12px;align-items:center;">
-          <!-- players com max-width adaptado para caber na coluna (mais estreitos) -->
           <div class="media-wrap" aria-label="Player do YouTube 1" style="width:100%;max-width:520px;position:relative;padding-top:56.25%;overflow:hidden;border-radius:8px;background:#000;">
             <iframe src="https://www.youtube-nocookie.com/embed/YTUEan019KI?rel=0&modestbranding=1"
               title="YouTube video player 1"
@@ -54,7 +49,6 @@
               style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"></iframe>
           </div>
 
-          <!-- Fallbacks centralizados -->
           <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;margin-top:6px;">
             <a href="https://www.youtube.com/watch?v=YTUEan019KI" target="_blank" rel="noopener noreferrer" style="padding:8px 10px;border-radius:8px;background:#f3f6f8;text-decoration:none;color:inherit;font-weight:700;">Abrir vídeo 1</a>
             <a href="https://www.youtube.com/watch?v=5Mmq-Mr05Oc&t=27s" target="_blank" rel="noopener noreferrer" style="padding:8px 10px;border-radius:8px;background:#f3f6f8;text-decoration:none;color:inherit;font-weight:700;">Abrir vídeo 2</a>
@@ -65,51 +59,56 @@
     </div>
   </div>
 
-  <!-- estilos responsivos inline simples -->
   <style>
     @media (max-width:900px){
       #videos-col{ width:48vw; max-width:560px; }
-      #left-col{ display:none; } /* ocultar coluna esquerda em telas menores para priorizar vídeos */
+      #left-col{ display:none; }
     }
     @media (max-width:640px){
-      #videos-col{ width:100vw; max-width:100%; min-width:unset; }
+      #videos-col{ width:100vw; max-width:100%; min-width:unset; padding:0 12px; }
       #videos-wrap{ border-radius:10px; padding:12px; }
     }
   </style>
 
   <script>
     (function(){
-      const wrap = document.getElementById('videos-wrap');
-      const overlay = document.getElementById('videos-bg-overlay');
+      // O background agora é aplicado ao body (fundo da página)
       const btnNone = document.getElementById('bg-none-videos');
       const btnLight = document.getElementById('bg-light-videos');
       const btnDark = document.getElementById('bg-dark-videos');
 
-      function setPressed(active){ [btnNone, btnLight, btnDark].forEach(b => b.setAttribute('aria-pressed', b===active ? 'true' : 'false')); }
+      function setPressed(active){
+        [btnNone, btnLight, btnDark].forEach(b => b.setAttribute('aria-pressed', b===active ? 'true' : 'false'));
+      }
 
       function aplicarSemFundo(){
-        wrap.style.backgroundImage = '';
-        wrap.style.backgroundColor = '#fff';
-        overlay.style.background = 'transparent';
-        overlay.style.backdropFilter = 'none';
+        document.body.style.backgroundImage = '';
+        document.body.style.backgroundColor = '';
+        document.body.style.backgroundRepeat = '';
+        document.body.style.backgroundSize = '';
+        document.body.style.backgroundPosition = '';
+        // ajuste overlay claro padrão
+        document.documentElement.style.setProperty('--page-overlay', 'rgba(255,255,255,0)');
         setPressed(btnNone);
       }
 
       function aplicarFundoClaro(){
-        wrap.style.backgroundImage = 'url("3.jpg")';
-        wrap.style.backgroundSize = 'cover';
-        wrap.style.backgroundPosition = 'center';
-        overlay.style.background = 'linear-gradient(rgba(255,255,255,0.60), rgba(255,255,255,0.35))';
-        overlay.style.backdropFilter = 'blur(2px)';
+        document.body.style.backgroundImage = 'url("3.jpg")';
+        document.body.style.backgroundSize = 'cover';
+        document.body.style.backgroundPosition = 'center';
+        document.body.style.backgroundRepeat = 'no-repeat';
+        // adiciona uma camada leve branca sobre a imagem para legibilidade
+        document.documentElement.style.setProperty('--page-overlay', 'rgba(255,255,255,0.25)');
         setPressed(btnLight);
       }
 
       function aplicarFundoEscuro(){
-        wrap.style.backgroundImage = 'url("4.jpg")';
-        wrap.style.backgroundSize = 'cover';
-        wrap.style.backgroundPosition = 'center';
-        overlay.style.background = 'linear-gradient(rgba(0,0,0,0.60), rgba(0,0,0,0.30))';
-        overlay.style.backdropFilter = 'blur(2px)';
+        document.body.style.backgroundImage = 'url("4.jpg")';
+        document.body.style.backgroundSize = 'cover';
+        document.body.style.backgroundPosition = 'center';
+        document.body.style.backgroundRepeat = 'no-repeat';
+        // camada escura para contraste
+        document.documentElement.style.setProperty('--page-overlay', 'rgba(0,0,0,0.45)');
         setPressed(btnDark);
       }
 
@@ -121,15 +120,36 @@
       }
 
       btnNone.addEventListener('click', aplicarSemFundo);
+      btnLight.addEventListener('click', ()=> testaImagem('3.jpg', aplicarFundoClaro, ()=>{ alert('Imagem 3.jpg não encontrada.'); aplicarSemFundo(); }));
+      btnDark.addEventListener('click', ()=> testaImagem('4.jpg', aplicarFundoEscuro, ()=>{ alert('Imagem 4.jpg não encontrada.'); aplicarSemFundo(); }));
 
-      btnLight.addEventListener('click', ()=>{
-        testaImagem('3.jpg', aplicarFundoClaro, ()=>{ alert('Imagem 3.jpg não encontrada. Verifique o caminho.'); aplicarSemFundo(); });
+      // overlay visual aplicada via pseudo-elemento criado dinamicamente
+      // cria apenas se ainda não existir
+      if(!document.getElementById('__page-bg-overlay')){
+        const ov = document.createElement('div');
+        ov.id = '__page-bg-overlay';
+        ov.setAttribute('aria-hidden','true');
+        Object.assign(ov.style,{
+          position:'fixed',
+          inset:'0',
+          pointerEvents:'none',
+          zIndex:0,
+          transition:'background .22s ease,backdrop-filter .22s ease'
+        });
+        document.body.appendChild(ov);
+      }
+      const pageOverlay = document.getElementById('__page-bg-overlay');
+
+      // observa var --page-overlay e aplica no overlay
+      const observer = new MutationObserver(()=> {
+        const v = getComputedStyle(document.documentElement).getPropertyValue('--page-overlay') || 'rgba(0,0,0,0)';
+        pageOverlay.style.background = v.trim();
       });
+      // inicializa a var
+      document.documentElement.style.setProperty('--page-overlay', 'rgba(255,255,255,0)');
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['style'] });
 
-      btnDark.addEventListener('click', ()=>{
-        testaImagem('4.jpg', aplicarFundoEscuro, ()=>{ alert('Imagem 4.jpg não encontrada. Verifique o caminho.'); aplicarSemFundo(); });
-      });
-
+      // aplica estado inicial
       aplicarSemFundo();
     })();
   </script>
